@@ -33,6 +33,15 @@
 				padding-left: 10px;
 				width: 100%;
 			}
+
+			input.add {
+				font: 20px Arial;
+				text-align: center;
+				padding-left: 10px;
+				width: 150px;
+				height: 50px;
+			}
+
 		</style>
 
 	</head>
@@ -40,6 +49,7 @@
 
 	<body>
 		<div id='myTable'></div>
+		<input type='button' class='add' value='Add'>
 	</body>
 
 
@@ -51,8 +61,7 @@
 			tablesJs.draw(ctx, {
 				rows: 1,
 				class: 'my_table_style', // Assign a custom value to the class atribute of the table.
-				allow_remove_row: true, // Add a "remove" button at the right side of each row. This is false by default.
-	//          allow_add_row: true, // Add a blank row at the end, waiting to be edited. This is false by default. --> DEPRECATED!
+				remove_row_button: true, // Add a "remove" button at the right side of each row. This is false by default.
 				row_height: '50px', // This value will be added in the CSS heigh attribute of the row (tr).
 				header: [
 					{
@@ -67,6 +76,14 @@
 					{ id: 'min_minutes', width: '100px', text: 'min. minutes', type: 'int', value: 10 },
 					{ id: 'max_minutes', width: '100px', text: 'max. minutes', type: 'int', value: 5 },
 				],
+			});
+
+			// enable feature to add rows
+			$('.add').click(function () {
+				// add a row
+				tablesJs.add(ctx);
+				// set focus on the first cell or the last row
+				tablesJs.focus(ctx, tablesJs.count(ctx)-1, 0);
 			});
 
 			// add a column

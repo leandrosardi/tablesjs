@@ -33,8 +33,7 @@ All these files are included in this project. You can download them from this pa
         tablesJs.draw(ctx, {
             rows: 1,
             class: 'my_table_style', // Assign a custom value to the class atribute of the table.
-            allow_remove_row: true, // Add a "remove" button at the right side of each row. This is false by default.
-//          allow_add_row: true, // Add a blank row at the end, waiting to be edited. This is false by default. --> DEPRECATED!
+            remove_row_button: true, // Add a "remove" button at the right side of each row. This is false by default.
             row_height: '50px', // This value will be added in the CSS heigh attribute of the row (tr).
             header: [
                 {
@@ -88,8 +87,17 @@ tablesJs.value(ctx, rownum, colnum);
 // => return an integer
 ```
 
+# 5. Setting Focus on a Cell
 
-# 5. Catching Events
+```javascript
+tablesJs.focus(ctx, rownum, colnum);
+// => set focus on the input field inside the cell
+```
+
+
+# 6. Catching Events
+
+*(this feature is pending for development)*
 
 ```html
 <div id='myTable'></div>
@@ -98,8 +106,7 @@ tablesJs.value(ctx, rownum, colnum);
     $(document).ready(function() {
         tablesJs.draw(ctx, {
             rows: 1,
-            allow_remove_row: true, // Add a "remove" button at the right side of each row. This is false by default.
-//          allow_add_row: true, // Add a blank row at the end, waiting to be edited. This is false by default. --> DEPRECATED!
+            remove_row_button: true, // Add a "remove" button at the right side of each row. This is false by default.
             row_height: '50px', // this value will be added in the CSS heigh attribute of the row (tr).
             header: [
                 {
@@ -127,7 +134,9 @@ tablesJs.value(ctx, rownum, colnum);
 </script>
 ```
 
-# 6. Custom Cells
+# 7. Custom Cells
+
+*(this feature is pending for development)*
 
 You can add a custom HTML DOM inside a cell in order to add any kind of editable field that is not supported natively; like date, time, dropdown list, float. 
 
@@ -138,8 +147,7 @@ You can add a custom HTML DOM inside a cell in order to add any kind of editable
     $(document).ready(function() {
         tablesJs.draw(ctx, {
             rows: 1,
-            allow_remove_row: true, // Add a "remove" button at the right side of each row. This is false by default.
-//          allow_add_row: true, // Add a blank row at the end, waiting to be edited. This is false by default. --> DEPRECATED!
+            remove_row_button: true, // Add a "remove" button at the right side of each row. This is false by default.
             row_height: '50px', // this value will be added in the CSS heigh attribute of the row (tr).
             header: [
                 {
@@ -184,14 +192,16 @@ You can add a custom HTML DOM inside a cell in order to add any kind of editable
 
 4. Add custom drop-down menu to each row.
 
-5. Add 
+5. Catching custom events in text-fields like focus and keyup.
+
+6. Define protocol to add custom cell, and still be able to operate with all the features of tablesJs.
 
 # Additional Notes
-The **Filters.Js** is used at [**ExpandedVenture**](https://expandedventure.com/expandedventure) to develop different UI/UX features.
+The **Tables.Js** is used at [**ExpandedVenture**](https://expandedventure.com/expandedventure) to develop different UI/UX features.
 
-The **Filters.Js** library is just starting on Jun-2021, and more functions will be added as needed.
+The **Tables.Js** library is just starting on Jun-2021, and more functions will be added as needed.
 
-The **Filters.Js** library has been written following the [**W3C JavaScript Best Practices**](https://www.w3.org/community/webed/wiki/JavaScript_best_practices).
+The **Tables.Js** library has been written following the [**W3C JavaScript Best Practices**](https://www.w3.org/community/webed/wiki/JavaScript_best_practices).
 
 # Disclaimer
 Use at your own risk. The use of the software and scripts downloaded on this site is done at your own discretion and risk and with agreement that you will be solely responsible for any damage to any computer system or loss of data that results from such activities.
