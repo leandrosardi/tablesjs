@@ -1,29 +1,24 @@
 # Tables.js
 
-The **Tables.Js** is a JavaScript library allows you to draw HTML tables, with 
+The **Tables.Js** is a JavaScript library allows you to draw HTML tables with edition capabilities. 
 
-- in-cell edition, and 
+1. Installation
+2. Draw a First Table
+3. Adding Rows
+4. Getting Row Count
+5. Removing Rows
+6. Getting Cell Value
+7. Setting Focus on a Cell
+8. Catching Events
+9. Custom Cells
 
-- dynamic rows adding/removing.
-
-*(pending)* You can find a [live example](https://connectionsphere.com/developers/tablesjs) of **Tables.Js** here: [https://connectionsphere.com/developers/tablesjs](https://connectionsphere.com/developers/tablesjs)
-
-# 1. Getting Started
-Get started in 3 simple steps.
-
-1. Download the required libraries and stylesheets.
-All these files are included in this project. You can download them from this page.
-
-2. Include them in the <header> section of your HTML page.
+## 1. Installation
 
 ```html
-<script src="jquery-3.5.1.min.js" type="text/javascript"></script>
-<script src="commons.js" type="text/javascript"></script>
-<link rel="stylesheet" href="./templates.css">
-<script src="./tables.min.js" type="text/javascript"></script>
+<script src="https://connectionsphere.com/javascripts/tablesjs/tables.min.js" type="text/javascript"></script>
 ```
 
-3. Create the progress bar.
+## 2. Draw a First Table
 
 ```html
 <div id='myTable'></div>
@@ -55,20 +50,20 @@ All these files are included in this project. You can download them from this pa
 
 *(pending to add screesnhot here)*
 
-# 1. Adding Rows
+## 3. Adding Rows
 
 ```javascript
 tablesJs.add(ctx);
 ```
 
-# 2. Getting Row Count
+## 4. Getting Row Count
 
 ```javascript
 tablesJs.row_count(ctx);
 // => return an integer
 ```
 
-# 3. Removing Rows
+## 5. Removing Rows
 
 ```javascript
 tablesJs.remove(ctx, 0);
@@ -80,14 +75,14 @@ tablesJs.remove(ctx, tablesJs.row_count(ctx)-1);
 // removes the last row
 ```
 
-# 4. Getting Cell Value
+## 6. Getting Cell Value
 
 ```javascript
 tablesJs.value(ctx, rownum, colnum);
 // => return an integer
 ```
 
-# 5. Setting Focus on a Cell
+## 7. Setting Focus on a Cell
 
 ```javascript
 tablesJs.focus(ctx, rownum, colnum);
@@ -95,7 +90,7 @@ tablesJs.focus(ctx, rownum, colnum);
 ```
 
 
-# 6. Catching Events
+## 8. Catching Events
 
 *(this feature is pending for development)*
 
@@ -134,7 +129,7 @@ tablesJs.focus(ctx, rownum, colnum);
 </script>
 ```
 
-# 7. Custom Cells
+## 9. Custom Cells
 
 *(this feature is pending for development)*
 
@@ -182,7 +177,7 @@ You can add a custom HTML DOM inside a cell in order to add any kind of editable
 </script>
 ```
 
-# Further Work
+## Further Work
 
 1. Native support editable cells for other data types: date, time, dropdown list, float. 
 
@@ -196,17 +191,21 @@ You can add a custom HTML DOM inside a cell in order to add any kind of editable
 
 6. Define protocol to add custom cell, and still be able to operate with all the features of tablesJs.
 
-# Additional Notes
+
+## Additional Notes
+
 The **Tables.Js** is used at [**ExpandedVenture**](https://expandedventure.com/expandedventure) to develop different UI/UX features.
 
 The **Tables.Js** library is just starting on Jun-2021, and more functions will be added as needed.
 
 The **Tables.Js** library has been written following the [**W3C JavaScript Best Practices**](https://www.w3.org/community/webed/wiki/JavaScript_best_practices).
 
-# Disclaimer
+## Disclaimer
+
 Use at your own risk. The use of the software and scripts downloaded on this site is done at your own discretion and risk and with agreement that you will be solely responsible for any damage to any computer system or loss of data that results from such activities.
 
-# Maintainer
+## Maintainer
+
 Leandro Daniel Sardi <leandro((dot))sardi((@))expandedventure.com>
 
 
