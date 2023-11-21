@@ -59,7 +59,7 @@ tablesJs.add(ctx);
 ## 4. Getting Row Count
 
 ```javascript
-tablesJs.row_count(ctx);
+tablesJs.count(ctx);
 // => return an integer
 ```
 
@@ -71,28 +71,67 @@ tablesJs.remove(ctx, 0);
 ```
 
 ```javascript
-tablesJs.remove(ctx, tablesJs.row_count(ctx)-1);
+tablesJs.remove(ctx, tablesJs.count(ctx)-1);
 // removes the last row
 ```
 
-## 6. Getting Cell Value
+## 6. Cell Value
+
+You can get a cell value,
 
 ```javascript
-tablesJs.value(ctx, rownum, colnum);
-// => return an integer
+rownum = 0;
+colnum = 0;
+url = tablesJs.get_value(ctx, rownum, colnum);
+// => return a string
 ```
 
-## 7. Setting Focus on a Cell
+and you can set the velue of any cell too:
 
 ```javascript
+rownum = 0;
+colnum = 0;
+url = 'https://freeleadsdata.com';
+tablesJs.get_value(ctx, rownum, colnum, url);
+```
+
+## 7. Cell Color
+
+You can get the border color of a cell,
+
+```javascript
+rownum = 0;
+colnum = 0;
+color = tablesJs.get_color(ctx, rownum, colnum);
+// => return a string
+```
+
+and you can set the border color of any cell too:
+
+```javascript
+rownum = 0;
+colnum = 0;
+color = 'green';
+tablesJs.get_value(ctx, rownum, colnum, color);
+```
+
+## 8. Setting Focus on a Cell
+
+```javascript
+rownum = 0;
+colnum = 0;
 tablesJs.focus(ctx, rownum, colnum);
 // => set focus on the input field inside the cell
 ```
 
+## 9. Events Handling
 
-## 8. Catching Events
+You can define a callback function for 2 events:
 
-*(this feature is pending for development)*
+1. `on_edit_cell`, and
+2. `on_remove_row`.
+
+Here is a code to define a table with a callback function for the `on_edit_cell` event.
 
 ```html
 <div id='myTable'></div>
@@ -113,7 +152,6 @@ tablesJs.focus(ctx, rownum, colnum);
                     value: '', // default value for cells (td).
                 },
                 { id: 'min_minutes', width: '100px', text: 'min. minutes', type: 'int', value: 10 },
-                { id: 'max_minutes', width: '100px', text: 'max. minutes', type: 'int', value: 5 },
             ],
 
             // This functions is called just after a new cell (td) is created.
@@ -121,7 +159,7 @@ tablesJs.focus(ctx, rownum, colnum);
             // - rownum: number of the row, starting from 0.
             // - colnum: number of the column, starting from 0.
             // - td: is the DOM element.
-            on_field_update: function(rownum, colnum, td) {
+            on_edit_cell: function(rownum, colnum, s) {
                 // validate the the value of the cell (rownum, colnum) in the table inside ctx.
             },
         });
@@ -129,76 +167,64 @@ tablesJs.focus(ctx, rownum, colnum);
 </script>
 ```
 
-## 9. Custom Cells
+The callback function for the `on_remove_row` event is similar.
 
-*(this feature is pending for development)*
+```javascript
+			on_remove_row: function(rownum) {
+				// trace log
+				console.log('REMOVE');
+				console.log('rownum: '+rownum);
+				$('#myTableValues').val( 'REMOVE row ' + rownum.toString() );
+			},
+```
 
-You can add a custom HTML DOM inside a cell in order to add any kind of editable field that is not supported natively; like date, time, dropdown list, float. 
+## 9. Column Types
 
-```html
-<div id='myTable'></div>
-<script>
-    var ctx = document.getElementById('myTable');
-    $(document).ready(function() {
-        tablesJs.draw(ctx, {
-            rows: 1,
-            remove_row_button: true, // Add a "remove" button at the right side of each row. This is false by default.
-            row_height: '50px', // this value will be added in the CSS heigh attribute of the row (tr).
-            header: [
-                {
-                    id: 'url',
-                    width: '400px', // this value will be added in the CSS width attribute of the column (th).
-                    text: 'url', // name of the column, in the header (th).
-                    type: 'text', // it can be 'text', 'number' or 'list'.
-                    placeholder: 'write an URL here', // placeholder attribute of the input field. It is null by default.
-                    value: '', // default value for cells (td).
-                },
-                { id: 'min_minutes', width: '100px', text: 'min. minutes', type: 'int', value: 10 },
-                { id: 'max_minutes', width: '100px', text: 'max. minutes', type: 'int', value: 5 },
-            ],
+Each column can manage 4 different types:
 
-            // This functions is called just after a new cell (td) is created.
-            // Attributes:
-            // - rownum: number of the row, starting from 0.
-            // - colnum: number of the column, starting from 0.
-            // - td: is the DOM element.
-            on_cell_created: function(rownum, colnum, td) {
-                if ( rownum == 0 ) { // url
-                    // create a textfield inside this td
-                    var o = document.createElement("input");
-                    o.setAttribute(id, td.getAttribute('id')+'-input');
-                    o.addEventListener("keyup", function() {  
-                        // validate the the value of the cell (rownum, colnum) in the table inside ctx.
-                    });
-                    td.appendChild(o);
-            },
-        });
-    });
-</script>
+1. `type: 'text'`,
+2. `type: 'number'`,
+3. `type: 'date'`,
+4. `type: 'time'`,
+
+## 10. Using Tables.js as a [MySaaS](https://github.com/leandrosardi/my.saas) Extension
+
+If you are running a [MySaaS](https://github.com/leandrosardi/my.saas) project, you can add **Tables.js** as an extension.
+
+Such an extension includes a code example screen (/tablesjs) that you show to other developers, for reference.
+
+Install Tables.js as an extension of MySaaS is pretty simple.
+
+**Step 1:** Clone the project in the extensions folder.
+
+```bash
+cd ~/code/mysaas/extensions
+git clone https://github.com/leandrosardi/tablesjs
+```
+
+**Step 2:** Add the extension to your `config.rb` file.
+
+```ruby
+BlackStack::Extensions.append :tablesjs
 ```
 
 ## Further Work
 
-1. Native support editable cells for other data types: date, time, dropdown list, float. 
+1. Add support for currency cell type.
 
-2. Swtich a cell to editable by clicking a pencil icon, like happens in [Editables.js](https://github.com/leandrosardi/editablesjs)
+2. Define read-only columns.
 
-3. Add custom buttons to each row.
+3. Set/Get read-only status of any cell.
 
-4. Add custom drop-down menu to each row.
+4. Add row-selection support.
 
-5. Catching custom events in text-fields like focus and keyup.
+5. Swtich a cell to editable by clicking a pencil icon, like happens in [Editables.js](https://github.com/leandrosardi/editablesjs)
 
-6. Define protocol to add custom cell, and still be able to operate with all the features of tablesJs.
+6. Add custom buttons to each row.
 
+7. Add custom drop-down menu to each row.
 
-## Additional Notes
-
-The **Tables.Js** is used at [**ExpandedVenture**](https://expandedventure.com/expandedventure) to develop different UI/UX features.
-
-The **Tables.Js** library is just starting on Jun-2021, and more functions will be added as needed.
-
-The **Tables.Js** library has been written following the [**W3C JavaScript Best Practices**](https://www.w3.org/community/webed/wiki/JavaScript_best_practices).
+8. Catching support for cell focus event.
 
 ## Disclaimer
 
@@ -206,6 +232,6 @@ Use at your own risk. The use of the software and scripts downloaded on this sit
 
 ## Maintainer
 
-Leandro Daniel Sardi <leandro((dot))sardi((@))expandedventure.com>
+Leandro Daniel Sardi <leandro((@))connectionsphere.com>
 
 
