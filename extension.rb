@@ -26,11 +26,11 @@ BlackStack::Extensions::add ({
 
     # define CSSS files to add to the header of every page
     :css_files => [
-        '/tablesjs/css/filters.css',
+        '/tablesjs/css/tables.css',
     ],
 
     # define JS files to add to the header of every page
     :js_files => [
-        '/tablesjs/javascripts/filters.min.js',
+        '/tablesjs/javascripts/tables.min.js',
     ],
 })

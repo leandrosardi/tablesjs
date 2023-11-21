@@ -10,28 +10,76 @@
 				<header>
 					<h5>
 						<i class="icon-th-list"></i>
-						Simple Filter
+						Simple Table
 					</h5>
 				</header>
-				<div class="span5" id='job_title'></div>
+				<div class="span5">
+					<div id='myTable'></div>
+					<input type='button' class='add' value='Add'>
+				</div>
 				<div class="span6">
 					<pre>
-var job_title = document.getElementById('job_title');	  
-filtersJs.draw(job_title, {
-	label: 'Job Positions',
-	allowed_positive_keywords: true,
-	allowed_negative_keywords: true,
-});			
+// ...
 					</pre>
 				</div>
 			</section>
 		</section>
 
-	<script>
-		$(document).ready(function() {
+<script>
+	var ctx = document.getElementById('myTable');
+	$(document).ready(function() {
 
+		// draw the table
+		tablesJs.draw(ctx, {
+			rows: 1,
+			class: 'my_table_style', // Assign a custom value to the class atribute of the table.
+			remove_row_button: true, // Add a "remove" button at the right side of each row. This is false by default.
+			row_height: '50px', // This value will be added in the CSS heigh attribute of the row (tr).
+			header: [
+				{
+					id: 'url',
+					width: '400px', // This value will be added in the CSS width attribute of the column (th).
+					text: 'url', // Name of the column, in the header (th).
+					type: 'text', // It can be 'text', 'number' or 'list'.
+					placeholder: 'write an URL here', // Placeholder attribute of the input field. It is null by default.
+					value: '', // Inner text of the cell (th).
+					select_all: true, // Select all text on focus. It is false by default. 
+				},
+				{ id: 'min_minutes', width: '100px', text: 'min. minutes', type: 'int', value: 10 },
+				{ id: 'max_minutes', width: '100px', text: 'max. minutes', type: 'int', value: 5 },
+			],
 		});
-	</script>
+
+		// enable feature to add rows
+		$('.add').click(function () {
+			// add a row
+			tablesJs.add(ctx);
+			// set focus on the first cell or the last row
+			tablesJs.focus(ctx, tablesJs.count(ctx)-1, 0);
+		});
+
+		// add a column
+		tablesJs.add(ctx);
+		tablesJs.add(ctx);
+		tablesJs.add(ctx);
+		tablesJs.add(ctx);
+
+		// get row count
+		console.log( tablesJs.count(ctx).toString() );
+
+		// 
+		tablesJs.remove(ctx, 0);
+
+		// get row count
+		console.log( tablesJs.count(ctx).toString() );
+
+		// get cell value
+		console.log( tablesJs.value(ctx, 0, 1).toString() );
+
+		// set focus
+		tablesJs.focus(ctx, 1, 0);
+	});
+</script>
 
 
 		
