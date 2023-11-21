@@ -13,33 +13,13 @@
 						Simple Table
 					</h5>
 				</header>
-				<div class="span5">
-					<div id='myTable'></div>
-					<!--
-					<input type='button' class='add' value='Add'>
-					-->
-				</div>
 				<div class="span6">
-					<pre>
-tablesJs.draw(ctx, {
-	rows: 5,
-	class: 'table table-strip-condensed', // Assign a custom value to the class atribute of the table.
-	remove_row_button: false, // Add a "remove" button at the right side of each row. This is false by default.
-	row_height: '50px', // This value will be added in the CSS heigh attribute of the row (tr).
-	header: [
-		{
-			id: 'url',
-			width: '400px', // This value will be added in the CSS width attribute of the column (th).
-			text: 'url', // Name of the column, in the header (th).
-			type: 'text', // It can be 'text', 'number' or 'list'.
-			placeholder: 'write an URL here', // Placeholder attribute of the input field. It is null by default.
-			value: '', // Inner text of the cell (th).
-			select_all: true, // Select all text on focus. It is false by default. 
-		},
-		{ id: 'minutes', width: '100px', text: 'minutes', type: 'int', value: 10 },
-	],
-});
-					</pre>
+					<div id='myTable'></div>
+				</div>
+				<div class="span5">
+					<button class='add btn btn-blue'><i class='icon-plus'></i></button>
+					<br/>
+					<textarea id='myTableValues' style='width:100%;' rows='10'></textarea>
 				</div>
 			</section>
 		</section>
@@ -68,18 +48,15 @@ tablesJs.draw(ctx, {
 			on_remove_row: function(rownum) {
 				console.log('REMOVE');
 				console.log('rownum: '+rownum);
+				$('#myTableValues').val( 'REMOVE row ' + rownum.toString() );
 			},
 			on_edit_cell: function(rownum, colnum, value) {
 				console.log('EDITION: '+value);
 				console.log('rownum: '+rownum);
 				console.log('colnum: '+colnum);
+				$('#myTableValues').val( 'EDIT row ' + rownum.toString() + ' col ' + colnum.toString() + ' value ' + value.toString() );
 			},
 		});
-		// set focus
-		tablesJs.focus(ctx, 0, 0);
-
-
-/*
 		// enable feature to add rows
 		$('.add').click(function () {
 			// add a row
@@ -87,13 +64,9 @@ tablesJs.draw(ctx, {
 			// set focus on the first cell or the last row
 			tablesJs.focus(ctx, tablesJs.count(ctx)-1, 0);
 		});
-
-		// add a column
-		tablesJs.add(ctx);
-		tablesJs.add(ctx);
-		tablesJs.add(ctx);
-		tablesJs.add(ctx);
-
+		// set focus
+		tablesJs.focus(ctx, 0, 0);
+/*
 		// get row count
 		console.log( tablesJs.count(ctx).toString() );
 
