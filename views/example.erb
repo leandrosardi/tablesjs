@@ -1,0 +1,37 @@
+        <section class='row-fluid'>
+            <img src="https://github.com/leandrosardi/mysaas/blob/main/public/core/images/logo/logo-16-01.png?raw=true" alt='ConnectionSphere' />
+            <p>Filters.js Library</p>
+        </section>
+
+        <br/>
+
+		<section class="container span12">	  
+			<section class="box">
+				<header>
+					<h5>
+						<i class="icon-th-list"></i>
+						Simple Filter
+					</h5>
+				</header>
+				<div class="span5" id='job_title'></div>
+				<div class="span6">
+					<pre>
+var job_title = document.getElementById('job_title');	  
+filtersJs.draw(job_title, {
+	label: 'Job Positions',
+	allowed_positive_keywords: true,
+	allowed_negative_keywords: true,
+});			
+					</pre>
+				</div>
+			</section>
+		</section>
+
+	<script>
+		$(document).ready(function() {
+
+		});
+	</script>
+
+
+		
